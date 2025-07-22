@@ -160,7 +160,7 @@ namespace CrmCodeGenerator.VSPackage.Dialogs
 					{
 						Status.ShowBusy(Dispatcher, BusyIndicator, "Fetching entity metadata ...");
 
-						if (metadataCache.ProfileEntityMetadataCache.Any())
+						if (metadataCache?.ProfileEntityMetadataCache.Any() == true)
 						{
 							EntityMetadataCache = metadataCache.ProfileEntityMetadataCache;
 						}

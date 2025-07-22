@@ -44,18 +44,7 @@ namespace CrmCodeGenerator.VSPackage.Dialogs
 		public Context Context;
 		public bool StillOpen = true;
 
-		private MetadataCache MetadataCache
-		{
-			get
-			{
-				if (cacheThread?.IsAlive == true)
-				{
-					cacheThread.Join();
-				}
-
-				return metadataCache;
-			}
-		}
+		private MetadataCache MetadataCache => metadataCache;
 
 		private Mapper Mapper
 		{
@@ -77,7 +66,6 @@ namespace CrmCodeGenerator.VSPackage.Dialogs
 
 		private readonly ConnectionManager connectionManager;
 		private MetadataCache metadataCache;
-		private Thread cacheThread;
 
 		#region Init
 
@@ -208,8 +196,7 @@ namespace CrmCodeGenerator.VSPackage.Dialogs
 				};
 
 			// warm up the cache.
-			cacheThread = new Thread(() => metadataCache = Configuration.LoadCache(settings.Id));
-			cacheThread.Start();
+			metadataCache = Configuration.LoadCache(settings.Id);
 
 			WarmUpConnections();
 		}
